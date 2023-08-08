@@ -1,0 +1,30 @@
+.card{
+    border-radius: 8px;
+    color: #e0e1dd;
+    background-color: #0c1821;
+    width: fit-content;
+    padding: 1.2rem;
+    margin: 1.25rem 0rem;  
+
+}
+
+.card:hover{
+    transform:scale(1.02);
+    transition-duration: 100ms;
+
+    box-shadow: 0 5px 50px 8px #324a5f;
+    border: 1px solid #ccc9dc;    
+    
+}
+
+.card__btn{
+    margin: 4px;
+}
+
+.card__task{
+    margin: 8px;
+}
+
+.card__priority{
+    margin: 8px;
+}
