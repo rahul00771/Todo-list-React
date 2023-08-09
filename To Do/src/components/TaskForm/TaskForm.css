@@ -1,0 +1,30 @@
+
+
+label{
+    color: #e0e1dd;
+    font-size: small;
+    margin: 1rem;
+}
+input{
+    width: 50%;
+    height: 30px;
+}
+
+.heading{
+    color: #e0e1dd;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.input__priority{
+    width: 100px;
+    height: 30px;
+}
