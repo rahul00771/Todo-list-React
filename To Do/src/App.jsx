@@ -14,9 +14,8 @@ export const App = () => {
 
       <div className="addBtn">
       <Box >
-        <Fab className='fab' variant='extended' size='large'>
-          <AddIcon>
-            {onclick=()=>{alert("Add button clicked")}}           
+        <Fab className='fab' variant='extended' size='large'  onClick={()=>{alert("Add button clicked")}}>
+          <AddIcon>                       
           </AddIcon>
           Add Task
         </Fab>
