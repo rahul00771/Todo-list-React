@@ -6,3 +6,16 @@
     gap: 2.5rem;
     flex-wrap: wrap;
 }
+
+.addBtn{
+    margin: 0px;
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed;    
+}
+
+.fab:hover{
+    box-shadow: 0 5px 60px 8px #466784;
+}
