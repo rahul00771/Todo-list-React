@@ -1,6 +1,7 @@
 import React from 'react';
 import './TaskForm.css';
-import { Header } from '../Header/Header';
+import {Link} from 'react-router-dom';
+
 
 
 export const TaskForm = () => {
@@ -16,6 +17,12 @@ export const TaskForm = () => {
             <option className='priority--medium'>Medium</option> 
             <option className='priority--low'>Low</option>
         </select>
+        <section className="btn-container">
+          <Link to='/'>
+            <button className='btn'>Cancel</button>
+          </Link>
+          <button className='btn' onClick={()=>console.log("Added task")}>Save</button>
+        </section>
     </div>
     
 </>

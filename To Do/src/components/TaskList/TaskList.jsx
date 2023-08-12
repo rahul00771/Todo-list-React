@@ -18,12 +18,14 @@ export const TaskList = () => {
         </section>
 
       <div className="addBtn">
-      <Box>        
+      <Box> 
+        <Link to="/add">
         <Fab className='fab' variant='extended' size='large'>        
           <AddIcon>                                             
           </AddIcon>
           Add Task
         </Fab>
+        </Link>
       </Box>              
       </div>
                         
