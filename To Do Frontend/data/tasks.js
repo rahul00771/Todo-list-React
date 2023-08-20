@@ -1,5 +1,3 @@
-
-
 const tasks = [{
     id:1,
     task:"This is my first task.",
@@ -44,3 +42,4 @@ const tasks = [{
 }]
 
 export default tasks;
+
