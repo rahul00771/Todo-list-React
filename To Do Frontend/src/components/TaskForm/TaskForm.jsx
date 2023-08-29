@@ -3,16 +3,44 @@ import './TaskForm.css';
 import {Link} from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Stack } from '@mui/material';
+import { useState, useEffect } from 'react';
+import {createTodo} from '../../services/todoServices';
 
 
 
 export const TaskForm = () => {
+  
+  const [task, setTask] = useState("");
+  //-----------------TODO - apply a logic for default priority as low-------------------//
+  const [priority, setPriority] = useState("");  
+  
+  const handleTaskChange = (event)=>{
+    setTask(event.target.value);
+  }
+  
+  
+  const handleSaveButton = ()=>{    
+    try {
+      const newData = createTodo(task, priority);
+      console.log(newData);
+      //resetting the input fields
+      setTask("");
+      setPriority("");
+      console.log("Todo added succesfully");
+      //------------------TODO - after clicking save navigate to the homepage----------------//
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   return (
     <>
     <div className='container'>        
         <h1 className='heading'>Add a new task</h1>
         <label>Enter the task:</label>
-        <input className='input__task' placeholder='Task'></input>        
+        <input className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
         <label>Select priority:</label>  
         <select className='input__priority'>
             <option className='priority--high'>High</option>
@@ -25,11 +53,9 @@ export const TaskForm = () => {
           <Link to='/'>
             <Button variant='contained'>Cancel</Button>
           </Link>
-            <Button variant='outlined'>Save</Button>
+            <Button onClick={handleSaveButton} variant='outlined'>Save</Button>
           </Stack>
-        </section>
-
-        
+        </section>        
 
     </div>
     
