@@ -19,6 +19,7 @@ export const createTodo = async (task, priority)=> {
 export const getTodo = async () => {
     try {
         const response = await API.get('/todos');
+        console.log(response.data);
         return response.data;        
     } catch (error) {
         console.log(error);

@@ -3,7 +3,7 @@ import './TaskForm.css';
 import {Link} from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Stack } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import {createTodo} from '../../services/todoServices';
 
 
@@ -12,13 +12,14 @@ export const TaskForm = () => {
   
   const [task, setTask] = useState("");
   //-----------------TODO - apply a logic for default priority as low-------------------//
-  const [priority, setPriority] = useState("");  
+  //remove low from useState
+  const [priority, setPriority] = useState("Low");  
   
   const handleTaskChange = (event)=>{
     setTask(event.target.value);
   }
   
-  
+
   const handleSaveButton = ()=>{    
     try {
       const newData = createTodo(task, priority);
