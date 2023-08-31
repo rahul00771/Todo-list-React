@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getTodo } from '../../services/todoServices';
+import { deleteTodo, getTodo } from '../../services/todoServices';
 
 
 
@@ -14,6 +14,8 @@ import { getTodo } from '../../services/todoServices';
 export const TaskList = () => {
 
   const [todos, setTodos] = useState([]);
+
+
 
   //retrieving the todos
   useEffect(()=>{
@@ -30,12 +32,25 @@ export const TaskList = () => {
   }, []);
   
 
+  //for deleting a todo(pass this function to the task component onclick)
+  const deleteData = async(id) => {
+    try {
+      const deletedData = await deleteTodo(id);
+      console.log("Deleted: ", deleteData); 
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== id));
+    } 
+    catch (error) {
+      console.log('error: ', error);
+    }
+  }
+
 
   return (
     <>
         <section className='task-list'>
-            {                          todos.map((todo) => {
-                  return (<Task key = {todo._id} {...todo}/>);
+            {   
+                todos.map((todo) => {
+                  return (<Task key = {todo._id} {...todo} onDelete = {()=> deleteData(todo._id)}/>);
                 })
             }
         </section>

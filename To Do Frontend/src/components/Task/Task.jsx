@@ -8,8 +8,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 
 
+
 export const Task = (props) => {
-    const {id, task, priority, isCompleted} = props;
+    const {id, task, priority, isCompleted, onDelete} = props;
+    
+    const deleteHandler = ()=>{
+        onDelete;
+    }
+
   return (
     <>
         <article className='card'>
@@ -19,7 +25,7 @@ export const Task = (props) => {
             <button className='card__btn'>delete</button>                   */}
         
             <Stack direction="row-reverse" spacing={1}>
-                <IconButton color="error">
+                <IconButton onClick={deleteHandler} color="error">
                     <DeleteIcon/>
                 </IconButton>
                 <Button variant="outlined" size="small" endIcon={<EditIcon/>}>Edit</Button>
