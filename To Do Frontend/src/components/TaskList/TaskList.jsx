@@ -15,8 +15,6 @@ export const TaskList = () => {
 
   const [todos, setTodos] = useState([]);
 
-
-
   //retrieving the todos
   useEffect(()=>{
     const fetchData = async() =>{
@@ -36,10 +34,20 @@ export const TaskList = () => {
   const deleteData = async(id) => {
     try {
       const deletedData = await deleteTodo(id);
-      console.log("Deleted: ", deleteData); 
+      console.log("Deleted: ", deletedData); 
       setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== id));
     } 
     catch (error) {
+      console.log('error: ', error);
+    }
+  }
+
+  //defining updateData function
+  const updateData = (id) => {
+    try {
+      const updatedTask = new updateTodo(id);
+      console.log("updated task: ", updatedTask);      
+    } catch (error) {
       console.log('error: ', error);
     }
   }
@@ -50,7 +58,7 @@ export const TaskList = () => {
         <section className='task-list'>
             {   
                 todos.map((todo) => {
-                  return (<Task key = {todo._id} {...todo} onDelete = {()=> deleteData(todo._id)}/>);
+                  return (<Task key = {todo._id} id = {todo._id} {...todo} onDelete = {()=> deleteData(todo._id)} onUpdate = {()=>{updateData(todo._id)}}/>);
                 })
             }
         </section>

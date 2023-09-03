@@ -27,9 +27,9 @@ export const getTodo = async () => {
 };
 
 //updating a todo
-export const updateTodo = async(todoId) => {
+export const updateTodo = async(todoId, task, priority) => {
     try {
-        const response = await API.put(`/todos/${todoId}`);
+        const response = await API.put(`/todos/${todoId}`, {task, priority});
         return response.data;
     } catch (error) {
         console.log(error);
