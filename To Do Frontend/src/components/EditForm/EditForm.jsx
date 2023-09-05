@@ -1,33 +1,49 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../TaskForm/TaskForm.css';
 import {Link, useParams} from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Stack } from '@mui/material';
 import { useState} from 'react';
-import { updateTodo } from '../../services/todoServices';
+import { getTodoWithId, updateTodo } from '../../services/todoServices';
 
 
 //-----------------Navigate (maybe using history)------------//
-//-----------------TODO-- get the original todos and set it to the input fields------//
 
 
 export const EditForm = () => {
+
+    //taking the task id from the params
+  const myParams = useParams();
+    //extracting the id in string
+  const todoId = myParams.id.toString();
   
   const [task, setTask] = useState("");
   //-----------------TODO - apply a logic for default priority as low-------------------//
   //remove low from useState
-  const [priority, setPriority] = useState("Low");  
+  const [priority, setPriority] = useState("low");  
   
+
+  //get request of todo with id = todoId
+  //default loading of todos value
+  useEffect(()=>{
+    const getPreviousData = async(todoId) => {
+
+      try {
+        const fetchedData = await getTodoWithId(todoId);
+        // console.log(fetchedData);
+        setTask(fetchedData.task);
+      } catch (error) {
+        console.log(Error);
+      }      
+    };
+    getPreviousData(todoId);
+  }, [])
+
+
   const handleTaskChange = (event)=>{
     setTask(event.target.value);
   }
-
-
-  //taking the task id from the params
-  const myParams = useParams();
-  //extracting the id in string
-  const todoId = myParams.id.toString();
 
   const updateListener = () => {    
     try {

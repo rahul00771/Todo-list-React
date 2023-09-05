@@ -23,7 +23,7 @@ export const TaskForm = () => {
   const handleSaveButton = ()=>{    
     try {
       const newData = createTodo(task, priority);
-      console.log(newData);
+      // console.log(newData);
       //resetting the input fields
       setTask("");
       setPriority("");

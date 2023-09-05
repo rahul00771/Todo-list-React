@@ -20,7 +20,7 @@ export const TaskList = () => {
     const fetchData = async() =>{
       try {
         const fetchedData = await getTodo();
-        console.log('Fetched Data:', fetchedData);
+        // console.log('Fetched Data:', fetchedData);
         setTodos(fetchedData);
       } catch (error) {
         console.error('Error fetching todos:', error);
