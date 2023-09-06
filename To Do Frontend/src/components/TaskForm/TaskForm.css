@@ -31,7 +31,7 @@ input{
     height: 35px;
 }
 
-.priority--high{
+/* .priority--high{
     background-color: red;
 }
 .priority--medium{
@@ -39,7 +39,7 @@ input{
 }
 .priority--low{
     background-color: green;
-}
+} */
 
 
 .btn-container{

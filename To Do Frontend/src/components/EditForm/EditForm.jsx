@@ -19,8 +19,7 @@ export const EditForm = () => {
   const todoId = myParams.id.toString();
   
   const [task, setTask] = useState("");
-  //-----------------TODO - apply a logic for default priority as low-------------------//
-  //remove low from useState
+  
   const [priority, setPriority] = useState("low");  
   
 
@@ -33,6 +32,7 @@ export const EditForm = () => {
         const fetchedData = await getTodoWithId(todoId);
         // console.log(fetchedData);
         setTask(fetchedData.task);
+        setPriority(fetchedData.priority);
       } catch (error) {
         console.log(Error);
       }      
@@ -41,10 +41,17 @@ export const EditForm = () => {
   }, [])
 
 
+  //setting the new priority
+  const priorityHandler = (event)=>{
+      setPriority(event.target.value);
+  }
+
+    //setting the new task
   const handleTaskChange = (event)=>{
     setTask(event.target.value);
   }
 
+  //comms with the bcakend for PUT request using axios instance
   const updateListener = () => {    
     try {
     
@@ -54,7 +61,6 @@ export const EditForm = () => {
       setTask("");
       setPriority("");
       console.log("Todo updated succesfully");    
-      //------------------TODO - after clicking save navigate to the homepage----------------//
 
     } catch (error) {
       console.log(error);
@@ -68,12 +74,12 @@ export const EditForm = () => {
     <div className='container'>        
         <h1 className='heading'>Edit the task</h1>
         <label>Update the task:</label>
-        <input className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
+        <input autoFocus className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
         <label>Select priority:</label>  
-        <select className='input__priority'>
-            <option className='priority--high'>High</option>
-            <option className='priority--medium'>Medium</option> 
-            <option className='priority--low'>Low</option>
+        <select onChange={priorityHandler} className='input__priority'>
+            <option value = "low" className='priority--low'>Low</option>
+            <option value = 'medium' className='priority--medium'>Medium</option> 
+            <option value = "high" className='priority--high'>High</option>
         </select>        
 
         <section className='btn-container'>

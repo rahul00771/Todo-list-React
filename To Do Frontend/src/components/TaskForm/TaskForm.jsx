@@ -11,15 +11,25 @@ import {createTodo} from '../../services/todoServices';
 export const TaskForm = () => {
   
   const [task, setTask] = useState("");
-  //-----------------TODO - apply a logic for default priority as low-------------------//
-  //remove low from useState
-  const [priority, setPriority] = useState("Low");  
   
+  //default priority low
+  const [priority, setPriority] = useState("low");  
+  
+
+  //sets the value of task on change in value of the input field
+  const priorityHandler = (event)=>{
+    setPriority(event.target.value);
+    // console.log(priority);
+  }
+
+  //sets the value of priority on change in value of the input field
   const handleTaskChange = (event)=>{
     setTask(event.target.value);
+    // console.log(task);
   }
   
 
+  //calling the axios instance (communicating with the backend for posting)
   const handleSaveButton = ()=>{    
     try {
       const newData = createTodo(task, priority);
@@ -41,12 +51,12 @@ export const TaskForm = () => {
     <div className='container'>        
         <h1 className='heading'>Add a new task</h1>
         <label>Enter the task:</label>
-        <input className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
+        <input autoFocus className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
         <label>Select priority:</label>  
-        <select className='input__priority'>
-            <option className='priority--high'>High</option>
-            <option className='priority--medium'>Medium</option> 
-            <option className='priority--low'>Low</option>
+        <select onChange = {priorityHandler} className='input__priority'>
+            <option value="low" className='priority--low'>Low</option>
+            <option value="medium" className='priority--medium'>Medium</option> 
+            <option value="high" className='priority--high'>High</option>
         </select>        
 
         <section className='btn-container'>
@@ -54,7 +64,7 @@ export const TaskForm = () => {
           <Link to='/'>
             <Button variant='contained'>Cancel</Button>
           </Link>
-            <Button onClick={handleSaveButton} variant='outlined'>Save</Button>
+          <Button onClick={handleSaveButton} variant='outlined'>Save</Button>            
           </Stack>
         </section>        
 
