@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../TaskForm/TaskForm.css';
 import {Link, useParams} from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -13,30 +14,35 @@ import { getTodoWithId, updateTodo } from '../../services/todoServices';
 
 export const EditForm = () => {
 
-    //taking the task id from the params
+  //for navigation
+  const navigateTo = useNavigate();
+
+  //taking the task id from the params
   const myParams = useParams();
     //extracting the id in string
   const todoId = myParams.id.toString();
   
   const [task, setTask] = useState("");
   
-  const [priority, setPriority] = useState("low");  
+  const [priority, setPriority] = useState("");  
   
 
   //get request of todo with id = todoId
   //default loading of todos value
-  useEffect(()=>{
-    const getPreviousData = async(todoId) => {
+  const getPreviousData = async(todoId) => {
 
-      try {
-        const fetchedData = await getTodoWithId(todoId);
-        // console.log(fetchedData);
-        setTask(fetchedData.task);
-        setPriority(fetchedData.priority);
-      } catch (error) {
-        console.log(Error);
-      }      
-    };
+    try {
+      const fetchedData = await getTodoWithId(todoId);
+      // console.log(fetchedData);
+      setTask(fetchedData.task);
+      setPriority(fetchedData.priority);      
+      
+    } catch (error) {
+      console.log(Error);
+    }      
+  };
+  
+  useEffect(()=>{    
     getPreviousData(todoId);
   }, [])
 
@@ -60,7 +66,10 @@ export const EditForm = () => {
       //resetting the input fields
       setTask("");
       setPriority("");
-      console.log("Todo updated succesfully");    
+      console.log("Todo updated succesfully");  
+      
+      //navigate back to tasklist
+      navigateTo('/');
 
     } catch (error) {
       console.log(error);

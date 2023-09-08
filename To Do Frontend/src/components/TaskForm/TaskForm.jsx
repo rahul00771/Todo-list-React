@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './TaskForm.css';
 import {Link} from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -9,6 +10,9 @@ import {createTodo} from '../../services/todoServices';
 
 
 export const TaskForm = () => {
+
+  // for navigation
+  const navigateTo = useNavigate();
   
   const [task, setTask] = useState("");
   
@@ -38,7 +42,9 @@ export const TaskForm = () => {
       setTask("");
       setPriority("");
       console.log("Todo added succesfully");
-      //------------------TODO - after clicking save navigate to the homepage----------------//
+      
+      //navigating back to tasklist
+      navigateTo('/');
 
     } catch (error) {
       console.log(error);
