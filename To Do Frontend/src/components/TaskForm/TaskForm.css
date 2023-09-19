@@ -1,16 +1,24 @@
 
 
-label{
+.input__label{
     color: #e0e1dd;
     font-size: small;
     margin: 1rem;
 }
-input{
+/* input{
+    border-radius: 8px;
+    padding: 3px;
+    width: 50%;
+    height: 35px;
+} */
+
+.input__task{
     border-radius: 8px;
     padding: 3px;
     width: 50%;
     height: 35px;
 }
+
 
 .heading{
     color: #e0e1dd;

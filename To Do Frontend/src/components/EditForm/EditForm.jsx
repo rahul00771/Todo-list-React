@@ -82,9 +82,9 @@ export const EditForm = () => {
     <>
     <div className='container'>        
         <h1 className='heading'>Edit the task</h1>
-        <label>Update the task:</label>
+        <label className='input__label'>Update the task:</label>
         <input autoFocus className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
-        <label>Select priority:</label>  
+        <label className='input__label'>Select priority:</label>  
         <select onChange={priorityHandler} className='input__priority'>
             <option value = "low" className='priority--low'>Low</option>
             <option value = 'medium' className='priority--medium'>Medium</option> 

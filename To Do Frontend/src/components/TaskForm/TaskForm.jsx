@@ -56,9 +56,9 @@ export const TaskForm = () => {
     <>
     <div className='container'>        
         <h1 className='heading'>Add a new task</h1>
-        <label>Enter the task:</label>
+        <label className='input__label'>Enter the task:</label>
         <input autoFocus className='input__task' value={task} onChange={handleTaskChange} placeholder='Task'></input>        
-        <label>Select priority:</label>  
+        <label className='input__label'>Select priority:</label>  
         <select onChange = {priorityHandler} className='input__priority'>
             <option value="low" className='priority--low'>Low</option>
             <option value="medium" className='priority--medium'>Medium</option> 
