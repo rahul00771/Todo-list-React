@@ -53,6 +53,11 @@ export default function LoginPage() {
                         </Stack>
                     </section>  
 
+                    <p className='register__message'>Don't have an account?</p>
+                    <Stack>
+                        <Button>Register</Button>
+                    </Stack>
+
                 </section>
 
             </div>

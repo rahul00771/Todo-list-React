@@ -5,6 +5,7 @@ import { TaskForm } from '../components/TaskForm/TaskForm';
 import { Header } from '../components/Header/Header';
 import { EditForm } from '../components/EditForm/EditForm';
 import LoginPage from '../components/LoginPage/LoginPage';
+import LandingPageComponent from '../components/LandingPage/LandingPage';
 
 export const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ export const AppRouter = () => {
         <Header/>
         <BrowserRouter>
             <Routes>
+                <Route path='home' Component={LandingPageComponent}/>
                 <Route path = '/login' Component = {LoginPage}/>
                 <Route exact path = "/" Component={TaskList}/>
                 <Route path ='/add' Component={TaskForm}/>
