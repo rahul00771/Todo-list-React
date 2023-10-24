@@ -1,7 +1,7 @@
-*{
+/* *{
     color: #e0e1dd;
     font-family:'Times New Roman', Times, serif
-}
+} */
 
 .heading{
     margin: 30px 0;
@@ -43,4 +43,10 @@
 
 .register__message{
     margin: 50px 50px 20px 50px;
+}
+
+.register__button{
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
 }

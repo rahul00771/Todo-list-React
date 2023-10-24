@@ -6,14 +6,21 @@
     padding: 1.2rem;
     margin: 1.25rem 0rem;  
 
+    /* Added border */
+    /* border: 0.001em solid #ccc9dc;        */
+
 }
 
 .card:hover{
-    transform:scale(1.03);
+
+    /* Rahul--
+    transform 1.03
+    */
+    transform:scale(1.0);
     transition-duration: 200ms;
 
-    box-shadow: 0 5px 50px 8px #324a5f;
-    border: 1px solid #ccc9dc;       
+    box-shadow: 0 5px 50px 8px #53687b;
+    /* border: 1px solid #ccc9dc;        */
 }
 
 .card__btn{
