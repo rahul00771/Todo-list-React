@@ -36,10 +36,27 @@
 .input{
     color: #0c1821;
     width: 250px;
-    margin: 20px 0;
+    margin: 20px 0 ;
     padding: 8px;
     border-radius: 4px;
 }
+
+.exists-active{
+    margin: 20px 0;
+    /* visibility: hidden; */
+    /* display: none; */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+}
+
+.exists-not{
+    margin: 20px 0;
+    /* visibility: hidden; */
+    display: none;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+}
+
 
 .register__message{
     margin: 50px 50px 20px 50px;

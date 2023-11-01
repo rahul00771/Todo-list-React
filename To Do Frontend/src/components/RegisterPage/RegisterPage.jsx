@@ -1,5 +1,5 @@
 import '../LoginPage/LoginPage.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Stack } from '@mui/material';
 import {Button} from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,10 @@ export default function RegisterPage() {
     const [userMail, setUserMail] = useState("");
     const [userPass, setUserPass] = useState("");
 
+    //state for already existing message conditional styling
+    const [exists, setExists] = useState(false);
+
+
     //setting value
     const handleMailChange = (event)=>{
         setUserMail(() => event.target.value);
@@ -30,17 +34,29 @@ export default function RegisterPage() {
     }  
 
     //save the credentials to the users collection
-    const handleSignUpBtn = ()=> {
+    const handleSignUpBtn = async()=> {
         try {            
             // console.log(userMail)
             // console.log(userPass)
 
             //calling the axios service to save the user to the DB collection
-            const newUser = registerUser(userMail, userPass);
-            console.log("New user saved", newUser);
-            setUserMail("");
-            setUserPass("");
-            navigateTo('/');
+            const newUser = await registerUser(userMail, userPass);
+            console.log(newUser);
+
+            //if we recieve null from the backend means user already exists
+            if(!newUser)
+            {
+                //set the state value of exists as true
+                setExists(true);
+                console.log("Exists");
+            }
+            else
+            {
+                console.log("New user saved");
+                setUserMail("");
+                setUserPass("");
+                navigateTo('/');
+            }
 
         } 
         catch (error) {
@@ -57,7 +73,7 @@ export default function RegisterPage() {
                 <section className='login__card'>
 
                     <label>Enter your email: </label>
-                    <input autoFocus onChange={handleMailChange} value ={userMail} className ='input email' placeholder='youremail@xyz'></input>
+                    <input autoFocus onChange={handleMailChange} value ={userMail} className ='input email' placeholder='youremail@xyz'></input>                    
 
                     <label>Enter a password:</label>
                     <input onChange={handlePassChange} value={userPass} className = 'input password' placeholder='password'></input>
@@ -82,6 +98,8 @@ export default function RegisterPage() {
                             {/* <Button variant = 'contained'>Sign up</Button> */}
                         </Stack>
                     </section>  
+
+                    <p className={exists? 'exists-active' : 'exists-not'}>Email already registered,<br></br> use another email or login.</p>
 
                 </section>
 

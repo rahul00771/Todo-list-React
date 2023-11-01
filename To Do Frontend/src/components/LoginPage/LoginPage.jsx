@@ -42,7 +42,7 @@ export default function LoginPage() {
                 <section className='login__card'>
 
                     <label>Enter registered email: </label>
-                    <input autoFocus onChange={handleMailChange} value ={mail} className ='input email' placeholder='youremail@xyz'></input>
+                    <input autoFocus onChange={handleMailChange} value ={mail} className ='input email' placeholder='youremail@xyz'></input>                    
 
                     <label>Enter the password:</label>
                     <input onChange={handlePassChange} value={pass} className = 'input password' placeholder='password'></input>
@@ -62,6 +62,8 @@ export default function LoginPage() {
                             <Button >sign up</Button>
                         </Link>
                     </Stack>
+
+                    {/* <p className="existsMessage">Email already registered,<br></br> use another email or login.</p> */}
 
                 </section>
 
