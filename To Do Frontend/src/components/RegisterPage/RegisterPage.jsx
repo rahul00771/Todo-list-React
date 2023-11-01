@@ -1,35 +1,53 @@
-
-
 import '../LoginPage/LoginPage.css';
 import { useState } from 'react';
 import { Stack } from '@mui/material';
 import {Button} from '@mui/material';
 import { Link } from 'react-router-dom';
+import registerUser from '../../services/registerService';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function RegisterPage() {
 
+    //for navigation
+    const navigateTo = useNavigate();
+
 
     //declaring the email and password states
-    const [mail, setMail] = useState("");
-    const [pass, setPass] = useState("");
+    const [userMail, setUserMail] = useState("");
+    const [userPass, setUserPass] = useState("");
 
     //setting value
     const handleMailChange = (event)=>{
-        setMail(() => event.target.value);
-        console.log(mail);
+        setUserMail(() => event.target.value);
+        // console.log(mail);
     }
 
     const handlePassChange = (event)=>{
-        setPass(() => event.target.value);
-        console.log(pass);
+        setUserPass(() => event.target.value);
+        // console.log(pass);
+    }  
+
+    //save the credentials to the users collection
+    const handleSignUpBtn = ()=> {
+        try {            
+            // console.log(userMail)
+            // console.log(userPass)
+
+            //calling the axios service to save the user to the DB collection
+            const newUser = registerUser(userMail, userPass);
+            console.log("New user saved", newUser);
+            setUserMail("");
+            setUserPass("");
+            navigateTo('/');
+
+        } 
+        catch (error) {
+            console.log('error in component service call: ', error);
+        }
     }
 
-    //reset button functionality
-    const cancelHandler = (event) => {
-        
-    }
 
     return(
         <> 
@@ -39,10 +57,10 @@ export default function RegisterPage() {
                 <section className='login__card'>
 
                     <label>Enter your email: </label>
-                    <input autoFocus onChange={handleMailChange} value ={mail} className ='input email' placeholder='youremail@xyz'></input>
+                    <input autoFocus onChange={handleMailChange} value ={userMail} className ='input email' placeholder='youremail@xyz'></input>
 
                     <label>Enter a password:</label>
-                    <input onChange={handlePassChange} value={pass} className = 'input password' placeholder='password'></input>
+                    <input onChange={handlePassChange} value={userPass} className = 'input password' placeholder='password'></input>
 
                     <section className='btn__container'>
                         <Stack direction={'row'} spacing={4}>
@@ -57,9 +75,9 @@ export default function RegisterPage() {
 
                             {/* -------------remove link to '/'----------- */}
                             
-                            <Link className = 'register__button' to = '/'>
-                                <Button variant = 'contained'>Sign up</Button>
-                            </Link>
+                            {/* <Link className = 'register__button' to = '/'> */}
+                                <Button onClick={handleSignUpBtn} variant = 'contained'>Sign up</Button>
+                            {/* </Link> */}
 
                             {/* <Button variant = 'contained'>Sign up</Button> */}
                         </Stack>
