@@ -4,34 +4,63 @@ import './LoginPage.css';
 import { useState } from 'react';
 import { Stack } from '@mui/material';
 import {Button} from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import loginUser from '../../services/loginService';
 
 
 
 export default function LoginPage() {
 
+    const navigateTo = useNavigate();
 
     //declaring the email and password states
-    const [mail, setMail] = useState("");
-    const [pass, setPass] = useState("");
+    const [userMail, setMail] = useState("");
+    const [userPass, setPass] = useState("");
+
+    //state for already existing message conditional styling(oppostite of register)
+    const [exists, setExists] = useState(false);
+
 
     //setting value
     const handleMailChange = (event)=>{
         setMail(() => event.target.value);
-        console.log(mail);
+        // console.log(userMail);
     }
 
     const handlePassChange = (event)=>{
         setPass(() => event.target.value);
-        console.log(pass);
+        // console.log(userPass);
     }
 
     //reset button functionality
     const resetHandler = (event) => {
         setMail('');
         setPass('');
-        console.log(mail);
-        console.log(pass);
+        console.log(userMail);
+        console.log(userPass);
+    }
+
+    //login btn listener
+    const handleLoginBtn = async()=> {
+        console.log(userMail);
+        console.log(userPass);
+
+        const loggedUser = await loginUser(userMail, userPass);
+
+        //if we get null from the backend(when user doesn't exists)
+        if(!loggedUser)
+        {
+            //opposite of register
+            setExists(true);
+            
+            console.log("Doesn't exists message");
+        }
+        else
+        {
+            navigateTo('/');
+            console.log(loggedUser);
+        }
+
     }
 
     return(
@@ -42,17 +71,17 @@ export default function LoginPage() {
                 <section className='login__card'>
 
                     <label>Enter registered email: </label>
-                    <input autoFocus onChange={handleMailChange} value ={mail} className ='input email' placeholder='youremail@xyz'></input>                    
+                    <input autoFocus onChange={handleMailChange} value ={userMail} className ='input email' placeholder='youremail@xyz'></input>                    
 
                     <label>Enter the password:</label>
-                    <input onChange={handlePassChange} value={pass} className = 'input password' placeholder='password'></input>
+                    <input onChange={handlePassChange} value={userPass} className = 'input password' placeholder='password'></input>
 
                     <section className='btn__container'>
                         <Stack direction={'row'} spacing={4}>
                             <Button onClick={resetHandler} variant = 'contained'>Reset</Button>
-                            <Link className = 'register__button' to = '/'>
-                                <Button variant = 'contained'>Login</Button>
-                            </Link>
+                            {/* <Link className = 'register__button' to = '/'> */}
+                                <Button onClick={handleLoginBtn} variant = 'contained'>Login</Button>
+                            {/* </Link> */}
                         </Stack>
                     </section>  
 
@@ -63,6 +92,7 @@ export default function LoginPage() {
                         </Link>
                     </Stack>
 
+                    <p className={exists? 'exists-active' : 'exists-not'}>Email already registered,<br></br> use another email or login.</p>
                     {/* <p className="existsMessage">Email already registered,<br></br> use another email or login.</p> */}
 
                 </section>
