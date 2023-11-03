@@ -20,6 +20,9 @@ export default function LoginPage() {
     //state for already existing message conditional styling(oppostite of register)
     const [exists, setExists] = useState(false);
 
+    //for password or user message state
+    const [message, setMessage] = useState("");
+
 
     //setting value
     const handleMailChange = (event)=>{
@@ -36,6 +39,7 @@ export default function LoginPage() {
     const resetHandler = (event) => {
         setMail('');
         setPass('');
+        setExists(false);
         console.log(userMail);
         console.log(userPass);
     }
@@ -48,17 +52,27 @@ export default function LoginPage() {
         const loggedUser = await loginUser(userMail, userPass);
 
         //if we get null from the backend(when user doesn't exists)
-        if(!loggedUser)
+        if(loggedUser == null)
         {
             //opposite of register
             setExists(true);
-            
+            setMessage("No account exists")
             console.log("Doesn't exists message");
+        }
+        else if(loggedUser.message === "authFailed")
+        {
+            setExists(true);
+            setMessage("Incorrect password");
+            console.log("Wrong password")
         }
         else
         {
-            navigateTo('/');
-            console.log(loggedUser);
+            try {
+                navigateTo('/todos');
+                console.log(loggedUser);    
+            } catch (error) {
+                console.log("error in try catch", error)
+            }            
         }
 
     }
@@ -92,7 +106,7 @@ export default function LoginPage() {
                         </Link>
                     </Stack>
 
-                    <p className={exists? 'exists-active' : 'exists-not'}>Email already registered,<br></br> use another email or login.</p>
+                    <p className={exists? 'exists-active' : 'exists-not'}>{message}.</p>
                     {/* <p className="existsMessage">Email already registered,<br></br> use another email or login.</p> */}
 
                 </section>

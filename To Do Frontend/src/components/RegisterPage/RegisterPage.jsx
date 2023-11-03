@@ -55,7 +55,7 @@ export default function RegisterPage() {
                 console.log("New user saved");
                 setUserMail("");
                 setUserPass("");
-                navigateTo('/');
+                navigateTo('/todos');
             }
 
         } 

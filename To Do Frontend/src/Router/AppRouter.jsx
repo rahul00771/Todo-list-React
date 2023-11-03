@@ -15,7 +15,7 @@ export const AppRouter = () => {
             <Routes>
                 <Route path='/register' Component={RegisterPage}/>
                 <Route path = '/login' Component = {LoginPage}/>
-                <Route exact path = "/" Component={TaskList}/>
+                <Route path = "/todos" Component={TaskList}/>
                 <Route path ='/add' Component={TaskForm}/>
                 <Route path='/edit/:id'Component={EditForm}/>
             </Routes>
