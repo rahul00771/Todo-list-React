@@ -2,12 +2,29 @@
 //importing the axios instance
 import API from "../axios/axios";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
+
+//to fetch todos of a specific user
+export const getTodoWithUser = async() =>{
+    try {
+        console.log("user",user);
+    
+        const response = await API.get(`/todos/${user.userMail}`);
+        return response.data;
+    } catch (error) {
+        console.log("error: ", error);
+    }
+}
+
+
 //creating the services(CRUD)
 
 //posting new data
 export const createTodo = async (task, priority)=> {
     try {
-            const response = await API.post('/todos', {task, priority});
+            let userMail = user.userMail;
+            const response = await API.post('/todos', {task, priority, userMail});
             return response.data;
     }
     catch (error) {

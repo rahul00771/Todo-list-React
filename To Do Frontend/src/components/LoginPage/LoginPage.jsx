@@ -68,7 +68,25 @@ export default function LoginPage() {
         else
         {
             try {
+
+
+                //----------------------todo-implement state(localstorage)
+
+
+
+                localStorage.removeItem("user");
+                //store response in local storage
+                localStorage.setItem("user", JSON.stringify(loggedUser));
+
+                console.log("SetItem");
+
+                console.log("localstorage check", JSON.parse(localStorage.getItem("user")));
+
+                console.log("login called localstorage saved");
                 navigateTo('/todos');
+
+                console.log("Navigated");
+
                 console.log(loggedUser);    
             } catch (error) {
                 console.log("error in try catch", error)

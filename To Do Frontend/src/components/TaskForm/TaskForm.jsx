@@ -44,7 +44,7 @@ export const TaskForm = () => {
       console.log("Todo added succesfully");
       
       //navigating back to tasklist
-      navigateTo('/');
+      navigateTo('/todos');
 
     } catch (error) {
       console.log(error);
@@ -67,7 +67,7 @@ export const TaskForm = () => {
 
         <section className='btn-container'>
           <Stack direction='row' spacing={4}>
-          <Link to='/'>
+          <Link to='/todos'>
             <Button variant='contained'>Cancel</Button>
           </Link>
           <Button onClick={handleSaveButton} variant='outlined'>Save</Button>            
